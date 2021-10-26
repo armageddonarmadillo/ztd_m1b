@@ -15,9 +15,10 @@ public class Main extends ApplicationAdapter {
 	static Random r = new Random();
 
 	//TODO: GAME LISTS
-	ArrayList<Zombie> zombies = new ArrayList<Zombie>();
-	ArrayList<Cannon> cannons = new ArrayList<Cannon>();
-	ArrayList<Button> buttons = new ArrayList<Button>();
+	static ArrayList<Zombie> zombies = new ArrayList<Zombie>();
+	static ArrayList<Cannon> cannons = new ArrayList<Cannon>();
+	static ArrayList<Button> buttons = new ArrayList<Button>();
+	static ArrayList<Bullet> bullets = new ArrayList<Bullet>();
 
 	//CREATE RUNS *ONCE* WHEN THE APPLICATION STARTS / OPENS
 	@Override
@@ -38,6 +39,7 @@ public class Main extends ApplicationAdapter {
 		for(Zombie z : zombies) z.draw(batch);
 		for(Cannon c : cannons) c.draw(batch);
 		for(Button b : buttons) b.draw(batch);
+		for(Bullet b : bullets) b.draw(batch);
 		// END DRAWING CODE BEFORE THIS
 		batch.end();
 	}
@@ -47,7 +49,7 @@ public class Main extends ApplicationAdapter {
 		for(Zombie z : zombies) z.update();
 		for(Cannon c : cannons) c.update();
 		for(Button b : buttons) b.update();
-
+		for(Bullet b : bullets) b.update();
 		//clean up after updates
 		housekeeping();
 		spawn_zombies();
@@ -55,6 +57,7 @@ public class Main extends ApplicationAdapter {
 
 	void housekeeping(){
 		for(Zombie z : zombies) if(!z.active) { zombies.remove(z); break; }
+		for(Bullet b : bullets) if(!b.active) { bullets.remove(b); break; }
 	}
 
 	void tap(){
@@ -80,7 +83,7 @@ public class Main extends ApplicationAdapter {
 
 	void spawn_zombies(){
 		if(!zombies.isEmpty()) return;
-		for (int i = 0; i < 15; i++) {
+		for (int i = 0; i < 1; i++) {
 			zombies.add(new Zombie("zzz", 1024 + i * 50, r.nextInt(450), 3));
 		}
 	}
