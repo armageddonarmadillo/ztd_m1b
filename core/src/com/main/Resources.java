@@ -18,6 +18,8 @@ public class Resources {
     static Texture button_pause = new Texture(Gdx.files.internal("pause.png"));
     static Texture button_start = new Texture(Gdx.files.internal("startButton.png"));
     static Texture button_exit = new Texture(Gdx.files.internal("exitButton.png"));
+    static Texture button_selected = new Texture(Gdx.files.internal("border.png"));
+    static Texture button_locked = new Texture(Gdx.files.internal("locked.png"));
 
     //TODO: CANNONS
     static Texture cannon = new Texture(Gdx.files.internal("Cannon.png"));

@@ -13,6 +13,7 @@ public class Main extends ApplicationAdapter {
 	//TODO: GAME VARIABLES / OBJECTS
 	SpriteBatch batch;
 	static Random r = new Random();
+	static String current_type = "";
 
 	//TODO: GAME LISTS
 	static ArrayList<Zombie> zombies = new ArrayList<Zombie>();
@@ -64,9 +65,23 @@ public class Main extends ApplicationAdapter {
 		if(Gdx.input.justTouched()){
 			int x = Gdx.input.getX(), y = Gdx.graphics.getHeight() - Gdx.input.getY();
 
+			for(Button b : buttons) if(b.hitbox().contains(x, y)) {
+				if(b.locked) b.locked = false;
+				else{
+					deselect();
+					b.selected = true;
+					current_type = b.type;
+				}
+				return;
+			}
+
 			for(Cannon c : cannons) if(c.hitbox().contains(x, y)) return;
-			if(buildable(x, y)) cannons.add(new Cannon("ccc", x, y));
+			if(buildable(x, y)) cannons.add(new Cannon(current_type, x, y));
 		}
+	}
+
+	void deselect(){
+		for(Button b : buttons) b.selected = false;
 	}
 
 	boolean buildable(int x, int y){
@@ -76,9 +91,12 @@ public class Main extends ApplicationAdapter {
 	void setup(){
 		Tables.init();
 		spawn_zombies();
-		for (int i = 0; i < 5; i++) {
-			buttons.add(new Button("bbb", 50 + i * 100, 525));
-		}
+		buttons.add(new Button("bbb", 50 + buttons.size() * 75, 525));
+		buttons.add(new Button("fire", 50 + buttons.size() * 75, 525));
+		buttons.add(new Button("super", 50 + buttons.size() * 75, 525));
+		buttons.add(new Button("double", 50 + buttons.size() * 75, 525));
+		buttons.add(new Button("laser", 50 + buttons.size() * 75, 525));
+
 	}
 
 	void spawn_zombies(){
