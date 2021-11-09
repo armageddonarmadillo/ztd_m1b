@@ -65,14 +65,27 @@ public class Main extends ApplicationAdapter {
 		if(Gdx.input.justTouched()){
 			int x = Gdx.input.getX(), y = Gdx.graphics.getHeight() - Gdx.input.getY();
 
-			for(Button b : buttons) if(b.hitbox().contains(x, y)) {
-				if(b.locked) b.locked = false;
-				else{
-					deselect();
-					b.selected = true;
-					current_type = b.type;
+			for(Button b : buttons) {
+				if (b.t != null && !b.t.hidden && b.t.close.hitbox().contains(x, y)) { b.t.hidden = true; return; }
+				if (b.t != null && !b.t.hidden && b.t.hitbox().contains(x, y)) return;
+				if (b.hitbox().contains(x, y)) {
+					if (b.locked) {
+						if (b.t.hidden) {
+							hidett();
+							b.t.hidden = false;
+						} else {
+							b.locked = false;
+							b.t.hidden = true;
+						}
+						return;
+					} else {
+						hidett();
+						deselect();
+						b.selected = true;
+						current_type = b.type;
+					}
+					return;
 				}
-				return;
 			}
 
 			for(Cannon c : cannons) if(c.hitbox().contains(x, y)) return;
@@ -82,6 +95,10 @@ public class Main extends ApplicationAdapter {
 
 	void deselect(){
 		for(Button b : buttons) b.selected = false;
+	}
+
+	void hidett(){
+		for(Button b : buttons) if(b.t != null) b.t.hidden = true;
 	}
 
 	boolean buildable(int x, int y){
