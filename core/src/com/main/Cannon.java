@@ -1,23 +1,36 @@
 package com.main;
 
+import com.badlogic.gdx.Gdx;
+import com.badlogic.gdx.graphics.g2d.Animation;
 import com.badlogic.gdx.graphics.g2d.Sprite;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
+import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import com.badlogic.gdx.math.Rectangle;
 
 public class Cannon {
     Sprite sprite;
     int x, y, w, h;
     String type;
-    int counter = 0, delay = 30;
+    int counter = 0, delay;
+
+    //Animation Variables
+    int cols, rows = 1;
+    Animation anim;
+    TextureRegion[] frames;
+    TextureRegion frame;
+    float frame_time;
 
     Cannon(String type, int x, int y){
         sprite = new Sprite(Tables.cannon_resources.get(type) == null ? Resources.cannon : Tables.cannon_resources.get(type));
         this.type = type;
-        w = 50;
-        h = 50;
+        delay = Tables.values.get("delay_" + type) == null ? 30 : Tables.values.get("delay_" + type);
+        cols = Tables.values.get("columns_" + type) == null ? 1 : Tables.values.get("columns_" + type);
+        w = (Tables.cannon_resources.get(type) == null ? Resources.cannon : Tables.cannon_resources.get(type)).getWidth() / cols;
+        h = (Tables.cannon_resources.get(type) == null ? Resources.cannon : Tables.cannon_resources.get(type)).getHeight() / rows;
         this.x = grid_lock(x - w / 2);
         this.y = grid_lock(y - h / 2);
         sprite.setPosition(this.x, this.y);
+        prep_animations();
     }
 
     void draw(SpriteBatch batch){
@@ -25,6 +38,10 @@ public class Cannon {
     }
 
     void update() {
+        frame_time += Gdx.graphics.getDeltaTime();
+        frame = (TextureRegion)anim.getKeyFrame(frame_time, true);
+        sprite = new Sprite(frame);
+        sprite.setPosition(this.x, this.y);
         sprite.setRotation(calc_angle());
         fire();
     }
@@ -44,5 +61,22 @@ public class Cannon {
     float calc_angle(){
         float zx = Main.zombies.get(0).x + (float)(Main.zombies.get(0).w / 2), zy = Main.zombies.get(0).y + (float)(Main.zombies.get(0).h / 2);
         return (float)Math.toDegrees(Math.atan((y - zy) / (x - zx)) + (x >= zx ? Math.PI : 0));
+    }
+
+    void prep_animations(){
+        //slice image into cells
+        TextureRegion[][] sheet = TextureRegion.split(Tables.cannon_resources.get(type) == null ? Resources.cannon : Tables.cannon_resources.get(type),
+                w,
+                h);
+
+        //set frames to maximum numbers of cells
+        frames = new TextureRegion[rows*cols];
+        int index = 0;
+        //fill frames
+        for(int r = 0; r < rows; r++)
+            for(int c = 0; c < cols; c++)
+                frames[index++] = sheet[r][c];
+
+        anim = new Animation(0.2f, frames);
     }
 }

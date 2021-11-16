@@ -12,20 +12,21 @@ public class Zombie {
     boolean active = true;
 
     //Animation Variables
-    int cols = 4, rows = 1;
+    int cols, rows = 1;
     Animation anim;
     TextureRegion[] frames;
     TextureRegion frame;
     float frame_time;
 
-    Zombie(String type, int x, int y, int speed){
+    Zombie(String type, int x, int y){
         this.type = type;
         this.x = x;
         this.y = y;
-        this.speed = speed;
-        w = 50;
-        h = 50;
-        hp = 5;
+        this.speed = Tables.values.get("speed_" + type) == null ? 2 : Tables.values.get("speed_" + type);
+        this.cols = Tables.values.get("columns_" + type) == null ? 4 : Tables.values.get("columns_" + type);
+        this.w = (Tables.zombie_resources.get(type) == null ? Resources.zombie : Tables.zombie_resources.get(type)).getWidth() / cols;
+        this.h = (Tables.zombie_resources.get(type) == null ? Resources.zombie : Tables.zombie_resources.get(type)).getHeight() / rows;
+        this.hp = Tables.values.get("health_" + type) == null ? 3 : Tables.values.get("health_" + type);
         // make this last in constructor
         prep_animations();
     }
@@ -45,9 +46,9 @@ public class Zombie {
 
     void prep_animations(){
         //slice image into cells
-        TextureRegion[][] sheet = TextureRegion.split(Resources.zombie,
-                Resources.zombie.getWidth() / cols,
-                Resources.zombie.getHeight() / rows);
+        TextureRegion[][] sheet = TextureRegion.split(Tables.zombie_resources.get(type) == null ? Resources.zombie : Tables.zombie_resources.get(type),
+                w,
+                h);
 
         //set frames to maximum numbers of cells
         frames = new TextureRegion[rows*cols];
