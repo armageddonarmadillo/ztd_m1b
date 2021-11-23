@@ -42,4 +42,13 @@ public class Resources {
     static Texture zombie_fast = new Texture(Gdx.files.internal("Fastzombies.png"));
     static Texture zombie_speedy = new Texture(Gdx.files.internal("speedy_zombie.png"));
     static Texture zombie_riot = new Texture(Gdx.files.internal("riotzombieBIG.png"));
+
+    //TODO: WIZARDS
+    static Texture wizard_red = new Texture(Gdx.files.internal("wizard_red.png"));
+    static Texture wizard_blue = new Texture(Gdx.files.internal("wizard_blue.png"));
+    static Texture wizard_green = new Texture(Gdx.files.internal("wizard_green.png"));
+
+    //TODO: WIZARD SPELL
+    static Texture wizard_red_spell = new Texture(Gdx.files.internal("wizard_red_spell.png"));
+
 }

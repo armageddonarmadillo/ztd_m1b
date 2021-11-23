@@ -35,6 +35,10 @@ public class Tables {
         zombie_resources.put("fast", Resources.zombie_fast);
         zombie_resources.put("speedy", Resources.zombie_speedy);
         zombie_resources.put("riot", Resources.zombie_riot);
+        //this will be wizards later
+        zombie_resources.put("wizard_red", Resources.wizard_red);
+        zombie_resources.put("wizard_blue", Resources.wizard_blue);
+        zombie_resources.put("wizard_green", Resources.wizard_green);
 
         //tooltips
         tooltips.put("fire", "Fires high damage bullets at a high rate of fire.");
@@ -59,7 +63,7 @@ public class Tables {
         //CANNON FIRE DELAYS
         values.put("delay_fire", 10);
         values.put("delay_double", 40);
-        values.put("delay_laser", 100);
+        values.put("delay_laser", 90);
 
         //ZOMBIE SPEED
         values.put("speed_dif", 1);
@@ -76,5 +80,8 @@ public class Tables {
         //ANIMATION COLUMNS
         values.put("columns_laser", 16);
         values.put("columns_speedy", 6);
+        values.put("columns_wizard_red", 2);
+        values.put("columns_wizard_blue", 2);
+        values.put("columns_wizard_green", 2);
     }
 }

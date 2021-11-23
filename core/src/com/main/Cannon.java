@@ -49,7 +49,7 @@ public class Cannon {
     void fire() {
         if(counter++ < delay) return;
         counter = 0;
-        Main.bullets.add(new Bullet("bbb", x + w / 2, y + h / 2));
+        Main.bullets.add(new Bullet(type, x + w / 2, y + h / 2));
     }
 
     int grid_lock(int n){
