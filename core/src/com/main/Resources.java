@@ -24,6 +24,8 @@ public class Resources {
     static Texture button_selected = new Texture(Gdx.files.internal("border.png"));
     static Texture button_locked = new Texture(Gdx.files.internal("locked.png"));
     static Texture button_close = new Texture(Gdx.files.internal("x.png"));
+    static Texture button_wall = new Texture(Gdx.files.internal("WallIcon.png"));
+    static Texture wall = new Texture(Gdx.files.internal("Wall.png"));
 
     //TODO: CANNONS
     static Texture cannon = new Texture(Gdx.files.internal("Cannon.png"));
@@ -51,4 +53,7 @@ public class Resources {
     //TODO: WIZARD SPELL
     static Texture wizard_red_spell = new Texture(Gdx.files.internal("wizard_red_spell.png"));
 
+    //TODO: EFFECTS
+    static Texture boom = new Texture(Gdx.files.internal("boom.png"));
+    static Texture click = new Texture(Gdx.files.internal("click_effect.png"));
 }

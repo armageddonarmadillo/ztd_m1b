@@ -20,6 +20,8 @@ public class Main extends ApplicationAdapter {
 	static ArrayList<Cannon> cannons = new ArrayList<Cannon>();
 	static ArrayList<Button> buttons = new ArrayList<Button>();
 	static ArrayList<Bullet> bullets = new ArrayList<Bullet>();
+	static ArrayList<Effect> effects = new ArrayList<Effect>();
+	static ArrayList<Wall> walls = new ArrayList<Wall>();
 
 	//CREATE RUNS *ONCE* WHEN THE APPLICATION STARTS / OPENS
 	@Override
@@ -41,6 +43,8 @@ public class Main extends ApplicationAdapter {
 		for(Cannon c : cannons) c.draw(batch);
 		for(Button b : buttons) b.draw(batch);
 		for(Bullet b : bullets) b.draw(batch);
+		for(Effect e : effects) e.draw(batch);
+		for(Wall w : walls) w.draw(batch);
 		// END DRAWING CODE BEFORE THIS
 		batch.end();
 	}
@@ -51,6 +55,7 @@ public class Main extends ApplicationAdapter {
 		for(Cannon c : cannons) c.update();
 		for(Button b : buttons) b.update();
 		for(Bullet b : bullets) b.update();
+		for(Wall w : walls) w.update();
 		//clean up after updates
 		housekeeping();
 		spawn_zombies();
@@ -59,11 +64,15 @@ public class Main extends ApplicationAdapter {
 	void housekeeping(){
 		for(Zombie z : zombies) if(!z.active) { zombies.remove(z); break; }
 		for(Bullet b : bullets) if(!b.active) { bullets.remove(b); break; }
+		for(Effect e : effects) if(!e.active) { effects.remove(e); break; }
+		for(Wall w : walls) if(!w.active) { walls.remove(w); break; }
 	}
 
 	void tap(){
 		if(Gdx.input.justTouched()){
 			int x = Gdx.input.getX(), y = Gdx.graphics.getHeight() - Gdx.input.getY();
+
+			effects.add(new Effect("boom", x, y));
 
 			for(Button b : buttons) {
 				if (b.t != null && !b.t.hidden && b.t.close.hitbox().contains(x, y)) { b.t.hidden = true; return; }
@@ -79,6 +88,10 @@ public class Main extends ApplicationAdapter {
 						}
 						return;
 					} else {
+						if(b.type.equals("wall") || b.type.equals("mounted")) {
+							if(walls.size() < 3) walls.add(new Wall(walls.size() * 50, 0, b.type.equals("mounted")));
+							return;
+						}
 						hidett();
 						deselect();
 						b.selected = true;
@@ -109,10 +122,15 @@ public class Main extends ApplicationAdapter {
 		Tables.init();
 		spawn_zombies();
 		buttons.add(new Button("bbb", 50 + buttons.size() * 75, 525));
+		buttons.get(buttons.size() - 1).selected = true;
+		buttons.get(buttons.size() - 1).locked = false;
 		buttons.add(new Button("fire", 50 + buttons.size() * 75, 525));
 		buttons.add(new Button("super", 50 + buttons.size() * 75, 525));
 		buttons.add(new Button("double", 50 + buttons.size() * 75, 525));
 		buttons.add(new Button("laser", 50 + buttons.size() * 75, 525));
+		buttons.add(new Button("wall", 50 + buttons.size() * 75, 525));
+		buttons.get(buttons.size() - 1).locked = false;
+		buttons.add(new Button("mounted", 50 + buttons.size() * 75, 525));
 
 	}
 
