@@ -8,6 +8,7 @@ import com.badlogic.gdx.math.Rectangle;
 
 public class Zombie {
     int x, y, w, h, speed, hp;
+    float chunk;
     String type;
     boolean active = true;
 
@@ -27,6 +28,7 @@ public class Zombie {
         this.w = (Tables.zombie_resources.get(type) == null ? Resources.zombie : Tables.zombie_resources.get(type)).getWidth() / cols;
         this.h = (Tables.zombie_resources.get(type) == null ? Resources.zombie : Tables.zombie_resources.get(type)).getHeight() / rows;
         this.hp = Tables.values.get("health_" + type) == null ? 3 : Tables.values.get("health_" + type);
+        chunk = (float)w / hp;
         // make this last in constructor
         prep_animations();
     }
@@ -35,6 +37,9 @@ public class Zombie {
         frame_time += Gdx.graphics.getDeltaTime();
         frame = (TextureRegion)anim.getKeyFrame(frame_time, true);
         batch.draw(frame, x, y);
+
+        batch.draw(Resources.red_bar, x, y + h, w, 5);
+        batch.draw(Resources.green_bar, x, y + h, hp * chunk, 5);
     }
 
     void update(){

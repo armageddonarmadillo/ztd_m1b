@@ -82,6 +82,7 @@ public class Tables {
         values.put("health_speedy", 2);
         values.put("health_fast", 3);
         values.put("health_riot", 10);
+        values.put("health_wizard_blue", 6);
 
         //ANIMATION COLUMNS
         values.put("columns_laser", 16);

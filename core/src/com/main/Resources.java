@@ -25,6 +25,8 @@ public class Resources {
     static Texture button_locked = new Texture(Gdx.files.internal("locked.png"));
     static Texture button_close = new Texture(Gdx.files.internal("x.png"));
     static Texture button_wall = new Texture(Gdx.files.internal("WallIcon.png"));
+
+    //Walls
     static Texture wall = new Texture(Gdx.files.internal("Wall.png"));
 
     //TODO: CANNONS

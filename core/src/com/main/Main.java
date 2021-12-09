@@ -14,6 +14,7 @@ public class Main extends ApplicationAdapter {
 	SpriteBatch batch;
 	static Random r = new Random();
 	static String current_type = "";
+	static boolean pause = false;
 
 	//TODO: GAME LISTS
 	static ArrayList<Zombie> zombies = new ArrayList<Zombie>();
@@ -51,11 +52,13 @@ public class Main extends ApplicationAdapter {
 
 	void update(){
 		tap();
-		for(Zombie z : zombies) z.update();
-		for(Cannon c : cannons) c.update();
-		for(Button b : buttons) b.update();
-		for(Bullet b : bullets) b.update();
-		for(Wall w : walls) w.update();
+		if(!pause){
+			for(Zombie z : zombies) z.update();
+			for(Cannon c : cannons) c.update();
+			for(Button b : buttons) b.update();
+			for(Bullet b : bullets) b.update();
+			for(Wall w : walls) w.update();
+		}
 		//clean up after updates
 		housekeeping();
 		spawn_zombies();
@@ -78,6 +81,11 @@ public class Main extends ApplicationAdapter {
 				if (b.t != null && !b.t.hidden && b.t.close.hitbox().contains(x, y)) { b.t.hidden = true; return; }
 				if (b.t != null && !b.t.hidden && b.t.hitbox().contains(x, y)) return;
 				if (b.hitbox().contains(x, y)) {
+					if(b.type.equals("pause") || b.type.equals("play")) {
+						pause = !pause;
+						b.type = pause ? "play" : "pause";
+						return;
+					}
 					if (b.locked) {
 						if (b.t.hidden) {
 							hidett();
@@ -131,6 +139,9 @@ public class Main extends ApplicationAdapter {
 		buttons.add(new Button("wall", 50 + buttons.size() * 75, 525));
 		buttons.get(buttons.size() - 1).locked = false;
 		buttons.add(new Button("mounted", 50 + buttons.size() * 75, 525));
+		buttons.add(new Button("pause", 1024 - 75, 525));
+		buttons.get(buttons.size() - 1).selected = false;
+		buttons.get(buttons.size() - 1).locked = false;
 
 	}
 
