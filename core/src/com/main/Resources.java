@@ -6,6 +6,7 @@ import com.badlogic.gdx.graphics.Texture;
 public class Resources {
     //TODO: UI ELEMENTS
     static Texture bg = new Texture(Gdx.files.internal("bg_lab.png"));
+    static Texture title = new Texture(Gdx.files.internal("ztdtitle.png"));
     static Texture red_bar = new Texture(Gdx.files.internal("red_bar.png"));
     static Texture green_bar = new Texture(Gdx.files.internal("green_bar.png"));
     static Texture tooltip_bg = new Texture(Gdx.files.internal("ttbg.png"));
@@ -30,6 +31,7 @@ public class Resources {
     static Texture wall = new Texture(Gdx.files.internal("Wall.png"));
 
     //TODO: CANNONS
+    static Texture damaged = new Texture(Gdx.files.internal("damaged.png"));
     static Texture cannon = new Texture(Gdx.files.internal("Cannon.png"));
     static Texture cannon_fire = new Texture(Gdx.files.internal("Firecannon.png"));
     static Texture cannon_super = new Texture(Gdx.files.internal("SuperCannon.png"));

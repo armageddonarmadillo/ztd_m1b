@@ -23,7 +23,7 @@ public class Zombie {
         this.type = type;
         this.x = x;
         this.y = y;
-        this.speed = Tables.values.get("speed_" + type) == null ? 2 : Tables.values.get("speed_" + type);
+        this.speed = (Tables.values.get("speed_" + type) == null ? 2 : Tables.values.get("speed_" + type));
         this.cols = Tables.values.get("columns_" + type) == null ? 4 : Tables.values.get("columns_" + type);
         this.w = (Tables.zombie_resources.get(type) == null ? Resources.zombie : Tables.zombie_resources.get(type)).getWidth() / cols;
         this.h = (Tables.zombie_resources.get(type) == null ? Resources.zombie : Tables.zombie_resources.get(type)).getHeight() / rows;
@@ -44,6 +44,7 @@ public class Zombie {
 
     void update(){
         x -= speed;
+        UI.score += hp > 0 ? 0 : (Tables.values.get("score_" + type) == null ? 1 : Tables.values.get("score_" + type));
         active = x >= 0 && hp > 0;
     }
 

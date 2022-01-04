@@ -24,7 +24,11 @@ public class Wall {
     }
 
     void update(){
-        for(Cannon c : cannons) c.update();
+        for(Cannon c : cannons) {
+            c.update();
+            c.active = !c.damaged;
+            if(!c.active) { cannons.remove(c); Main.effects.add(new Effect("boom", c.x + c.w / 2, c.y + c.h / 2)); break; }
+        }
         active = hp > 0;
     }
 

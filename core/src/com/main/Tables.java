@@ -54,6 +54,7 @@ public class Tables {
         tooltips.put("mounted", "Spawn a wall full of mounted cannons. Fires low damage bullets are a low rate of fire.");
 
         //CANNON PLACEMENT COSTS
+        values.put("place_cannon", 5);
         values.put("place_fire", 30);
         values.put("place_super", 25);
         values.put("place_double", 20);
@@ -83,6 +84,10 @@ public class Tables {
         values.put("health_fast", 3);
         values.put("health_riot", 10);
         values.put("health_wizard_blue", 6);
+
+        //ZOMBIE SCORE
+        values.put("score_speedy", 2);
+        values.put("score_riot", 5);
 
         //ANIMATION COLUMNS
         values.put("columns_laser", 16);
