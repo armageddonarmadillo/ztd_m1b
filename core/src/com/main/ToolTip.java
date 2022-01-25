@@ -26,7 +26,7 @@ public class ToolTip {
 
     void draw(SpriteBatch batch){
         if(hidden) return;
-        batch.draw(Resources.tooltip_bg, x, y, w, h);
+        batch.draw(Resources.tan, x, y, w, h);
         close.draw(batch);
 
         String[] words = (Tables.tooltips.get(type) == null ? "No description found..." : Tables.tooltips.get(type)).split(" ");
