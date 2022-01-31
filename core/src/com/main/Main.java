@@ -2,6 +2,7 @@ package com.main;
 
 import com.badlogic.gdx.ApplicationAdapter;
 import com.badlogic.gdx.Gdx;
+import com.badlogic.gdx.Preferences;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.utils.ScreenUtils;
@@ -16,6 +17,7 @@ public class Main extends ApplicationAdapter {
 	static ZTD ztd;
 	Lose lose;
 	static boolean started = false, about = false, gameover = false;
+	static Preferences p;
 
 	//CREATE RUNS *ONCE* WHEN THE APPLICATION STARTS / OPENS
 	@Override
@@ -23,8 +25,9 @@ public class Main extends ApplicationAdapter {
 		batch = new SpriteBatch();
 		start = new Start();
 		about_scene = new About();
-		ztd = new ZTD();
 		lose = new Lose();
+		p = Gdx.app.getPreferences("ztd_prefs");
+		ztd = new ZTD();
 	}
 
 	//RENDER RUNS ONCE PER FRAME

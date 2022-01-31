@@ -6,7 +6,7 @@ import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 
 public class UI {
     static BitmapFont font = new BitmapFont();
-    static int money, wave, score, life;
+    static int money, wave, score, life, zk;
 
     static void draw(SpriteBatch b){
         font.getData().setScale(1.75f);
@@ -18,6 +18,9 @@ public class UI {
         font.draw(b, "Score: " + score, 2, 597 - 12 * font.getData().scaleX * 2 - 6);
         font.setColor(Color.GREEN);
         font.draw(b, "Life: " + life, 2, 597 - 12 * font.getData().scaleX * 3 - 7);
+        //font.getData().setScale(1f);
+        font.setColor(Color.YELLOW);
+        font.draw(b, "ZK: " + Main.p.getInteger("zk"), 2, 597 - 12 * font.getData().scaleX * 4 - 8);
         font.getData().setScale(1f);
     }
 }

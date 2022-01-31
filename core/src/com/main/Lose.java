@@ -15,6 +15,8 @@ public class Lose extends Scene {
         if(m1.hitbox().contains(x, y)) {
             Main.started = false;
             Main.gameover = false;
+            Main.p.putInteger("zk", UI.zk);
+            Main.p.flush();
             Main.ztd = new ZTD();
         }
     }

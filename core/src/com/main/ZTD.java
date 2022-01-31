@@ -113,11 +113,13 @@ public class ZTD {
     }
 
     void setup(){
+        System.out.println(Main.p.getInteger("zk"));
         //set some UI values
         UI.money = 1000;
-        UI.life = 15;
+        UI.life = 1;
         UI.wave = 0;
         UI.score = 0;
+        UI.zk = Main.p.getInteger("zk");
         //clear lists
         buttons.clear();
         zombies.clear();
