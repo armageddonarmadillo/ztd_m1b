@@ -10,7 +10,7 @@ public class Start extends Scene {
     Start(){
         m1 = new mButton("start", (1024 / 2) - (mButton.bw / 2), 325, mButton.bw, mButton.bh, Color.DARK_GRAY);
         m2 = new mButton("about", (1024 / 2) - (mButton.bw / 2), 200, mButton.bw, mButton.bh, Color.DARK_GRAY);
-        m3 = new mButton("exit", (1024 / 2) - (mButton.bw / 2), 75, mButton.bw, mButton.bh, Color.DARK_GRAY);
+        m3 = new mButton("achieve", (1024 / 2) - (mButton.bw / 2), 75, mButton.bw, mButton.bh, Color.DARK_GRAY);
         font.setColor(Color.FIREBRICK);
         font.getData().setScale(5f);
         layout.setText(font, "Zombie Tower Defense");
@@ -19,6 +19,7 @@ public class Start extends Scene {
     void tap(int x, int y){
         if(m1.hitbox().contains(x, y)) Main.started = true;
         if(m2.hitbox().contains(x, y)) Main.about = true;
+        if(m3.hitbox().contains(x, y)) Main.achievements = true;
     }
 
     void draw(SpriteBatch batch){

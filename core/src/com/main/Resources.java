@@ -64,17 +64,17 @@ public class Resources {
     static Texture click = new Texture(Gdx.files.internal("click_effect.png"));
 
     //TODO: PREDEFINED TEXTURE COLORS
-    static Texture tan = create_texture(50, 50, Color.TAN);
-    static Texture dark_gray = create_texture(50, 50, Color.DARK_GRAY);
-    static Texture light_gray = create_texture(50, 50, Color.LIGHT_GRAY);
-    static Texture scarlet = create_texture(50, 50, Color.FIREBRICK);
+    static Texture tan = create_texture(Color.TAN);
+    static Texture dark_gray = create_texture(Color.DARK_GRAY);
+    static Texture light_gray = create_texture(Color.LIGHT_GRAY);
+    static Texture scarlet = create_texture(Color.FIREBRICK);
 
     //TODO: METHODS
     //creates a texture of a provided solid color
-    static Texture create_texture(int w, int h, Color color){
-        Pixmap p = new Pixmap(w, h, Pixmap.Format.RGBA8888);
+    static Texture create_texture(Color color){
+        Pixmap p = new Pixmap(1, 1, Pixmap.Format.RGBA8888);
         p.setColor(color);
-        p.fillRectangle(0, 0, w, h);
+        p.fillRectangle(0, 0, 1, 1);
         return new Texture(p);
     }
 
@@ -84,6 +84,24 @@ public class Resources {
                 1f - color.r,
                 1f - color.g,
                 1f - color.b,
+                1f
+        );
+    }
+
+    static Color lighten_color(Color color){
+        return new Color(
+                Math.min(color.r + 0.1f, 1.0f),
+                Math.min(color.g + 0.1f, 1.0f),
+                Math.min(color.b + 0.1f, 1.0f),
+                1f
+        );
+    }
+
+    static Color darken_color(Color color){
+        return new Color(
+                Math.max(color.r - 0.1f, 0),
+                Math.max(color.g - 0.1f, 0),
+                Math.max(color.b - 0.1f, 0),
                 1f
         );
     }

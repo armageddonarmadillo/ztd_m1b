@@ -16,7 +16,8 @@ public class Main extends ApplicationAdapter {
 	About about_scene;
 	static ZTD ztd;
 	Lose lose;
-	static boolean started = false, about = false, gameover = false;
+	Achievements achieve;
+	static boolean started = false, about = false, gameover = false, achievements = false;
 	static Preferences p;
 
 	//CREATE RUNS *ONCE* WHEN THE APPLICATION STARTS / OPENS
@@ -26,6 +27,7 @@ public class Main extends ApplicationAdapter {
 		start = new Start();
 		about_scene = new About();
 		lose = new Lose();
+		achieve = new Achievements();
 		p = Gdx.app.getPreferences("ztd_prefs");
 		ztd = new ZTD();
 	}
@@ -39,6 +41,8 @@ public class Main extends ApplicationAdapter {
 		if(!started)
 			if(about)
 				about_scene.draw(batch);
+			else if(achievements)
+				achieve.draw(batch);
 			else start.draw(batch);
 			else {
 				if(gameover) lose.draw(batch);
@@ -53,6 +57,8 @@ public class Main extends ApplicationAdapter {
 			if(!started)
 				if(about)
 					about_scene.tap(x, y);
+				else if(achievements)
+					achieve.tap(x, y);
 				else start.tap(x, y);
 				else if (gameover) lose.tap(x, y);
 				else ztd.tap(x, y);

@@ -20,7 +20,8 @@ public class mButton {
         this.type = type;
         this.text = type.equals("start") ? "Start" :
                     type.equals("about") ? "About" :
-                        "button";
+                    type.equals("achieve") ? "Achievements" :
+                        type;
         this.color = color;
         font.setColor(Resources.inverse_color(color));
         while((layout.width < w - 4 * (float)w/10) && (layout.height < h - 3 * (float)h/10)){
@@ -37,14 +38,14 @@ public class mButton {
     }
 
     void draw(SpriteBatch batch){
-        batch.draw(Resources.create_texture(1, 1, color), x, y, w, h);
+        batch.draw(Resources.create_texture(color), x, y, w, h);
         font.setColor(color);
         font.draw(batch, text, x + (float)w / 2 - (float)layout.width / 2 + 1, y + (float)h / 2 + (float)layout.height / 2 - 1);
         font.draw(batch, layout, x + (float)w / 2 - (float)layout.width / 2, y + (float)h / 2 + (float)layout.height / 2);
-        batch.draw(Resources.create_texture(1, 1, Resources.inverse_color(color)), x, y, w, b);
-        batch.draw(Resources.create_texture(1, 1, Resources.inverse_color(color)), x, y + h, w, b);
-        batch.draw(Resources.create_texture(1, 1, Resources.inverse_color(color)), x, y, b, h);
-        batch.draw(Resources.create_texture(1, 1, Resources.inverse_color(color)), x + w - b, y, b, h);
+        batch.draw(Resources.create_texture(Resources.inverse_color(color)), x, y, w, b);
+        batch.draw(Resources.create_texture(Resources.inverse_color(color)), x, y + h, w, b);
+        batch.draw(Resources.create_texture(Resources.inverse_color(color)), x, y, b, h);
+        batch.draw(Resources.create_texture(Resources.inverse_color(color)), x + w - b, y, b, h);
     }
 
     Rectangle hitbox() { return new Rectangle(x, y, w, h); }
